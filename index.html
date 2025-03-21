@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title>Product Survey</title>
+    </head>
+    <body>
+        <form id="form1" onsubmit="validateForm(event)">
+            <h2>Survey Form</h2>
+            
+            <label class="required">Enter your name:</label>
+            <input type="text" id="firstname" name="nameInput" placeholder="first name" /> 
+            <input type="text" id="surname" name="nameInput" placeholder="surname" />  <br>
+            <p class="error-message" id="nameError">First name and Surname are required.</p>          
+            <br><br>
+
+            <label class="required">Enter your email:</label>
+            <input type="text" id="emailInput" name="emailInput" placeholder="email"/><br>
+            <p class="error-message" id="emailError">Enter a valid email (e.g., example@mail.com).</p>
+            <br><br>
+
+            <label>Enter your age:</label>
+            <input type="number" id="ageInout" name="ageInout" placeholder="age"/><br><br>
+
+            <label for="dropdown" class="required">Choose a Role:</label>
+            <select id="dropdown" name="role">
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+            </select><br>
+            <p class="error-message" id="roleError">Role selection is required.</p>
+            <br><br>
+
+            <label class="required">Would you recommend our product to a friend?</label>
+            <input type="radio" id="yes" name="recommendation" value="yes" />
+            <label for="yes">Yes</label>
+            <input type="radio" id="no" name="recommendation" value="no" />
+            <label for="no">No</label>  <br>
+            <p class="error-message" id="recommendationError">Please select an option.</p>         
+            <br><br>
+
+            <label>Please let us know what you liked about our product:</label>
+            <input type="checkbox" id="warranty" name="preference" value="warranty" />
+            <label for="warranty">Warranty</label>
+            <input type="checkbox" id="powerusage" name="preference" value="powerusage" />
+            <label for="powerusage">Power usage</label>
+            <input type="checkbox" id="display" name="preference" value="display" />
+            <label for="display">Display Panel Type</label>
+            <br><br>
+
+            <label>Additional Remarks:</label><br>
+            <textarea id="remarks" name="remarks" placeholder="Type your remarks"></textarea>
+            <br><br>            
+            
+            <button type="submit">Submit</button>
+        </form>
+
+        <script>
+            function validateForm(event) {
+                event.preventDefault(); // Prevents submission if validation fails
+    
+                let isValid = true;                
+    
+                // Get input elements
+                let firstname = document.getElementById("firstname");
+                let surname = document.getElementById("surname");
+                let email = document.getElementById("emailInput");
+                let role = document.getElementById("dropdown");
+                let recommendation = document.querySelector('input[name="recommendation"]:checked');
+    
+                // Get error messages
+                let nameError = document.getElementById("nameError");
+                let emailError = document.getElementById("emailError");
+                let roleError = document.getElementById("roleError");
+                let recommendationError = document.getElementById("recommendationError");
+    
+                // Name Validation (Both First Name & Surname)
+                if (firstname.value.trim() === "" || surname.value.trim() === "") {
+                    firstname.classList.add("error");
+                    surname.classList.add("error");
+                    nameError.style.display = "block";
+                    isValid = false;
+                } else {
+                    firstname.classList.remove("error");
+                    surname.classList.remove("error");
+                    nameError.style.display = "none";
+                }
+    
+                // Email Validation (Must be in valid format)
+                let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (email.value.trim() === "" || !emailPattern.test(email.value)) {
+                    email.classList.add("error");
+                    emailError.style.display = "block";
+                    isValid = false;
+                } else {
+                    email.classList.remove("error");
+                    emailError.style.display = "none";
+                }
+    
+                // Role Selection Validation
+                if (role.value === "") {
+                    role.classList.add("error");
+                    roleError.style.display = "block";
+                    isValid = false;
+                } else {
+                    role.classList.remove("error");
+                    roleError.style.display = "none";
+                }
+    
+                // Recommendation Selection Validation
+                if (!recommendation) {
+                    recommendationError.style.display = "block";
+                    isValid = false;
+                } else {
+                    recommendationError.style.display = "none";
+                }
+    
+                // If all fields are valid, submit the form
+                if (isValid) {
+                    alert("Form submitted successfully!");
+                    document.getElementById("form1").submit();
+                }
+            }
+        </script>
+    </body>
+</html>

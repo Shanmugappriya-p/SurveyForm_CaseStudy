@@ -1,11 +1,11 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css">
+    <head>   
+        <link rel="stylesheet" href="./style.css"/>     
         <title>Product Survey</title>
     </head>
     <body>
         <form id="form1" onsubmit="validateForm(event)">
-            <h2>Survey Form</h2>
+            <h2 id="heading">Survey Form</h2>
             
             <label class="required">Enter your name:</label>
             <input type="text" id="firstname" name="nameInput" placeholder="first name" /> 
@@ -75,34 +75,28 @@
     
                 // Name Validation (Both First Name & Surname)
                 if (firstname.value.trim() === "" || surname.value.trim() === "") {
-                    firstname.classList.add("error");
-                    surname.classList.add("error");
+                    
                     nameError.style.display = "block";
                     isValid = false;
                 } else {
-                    firstname.classList.remove("error");
-                    surname.classList.remove("error");
+                    
                     nameError.style.display = "none";
                 }
     
                 // Email Validation (Must be in valid format)
                 let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
                 if (email.value.trim() === "" || !emailPattern.test(email.value)) {
-                    email.classList.add("error");
                     emailError.style.display = "block";
                     isValid = false;
                 } else {
-                    email.classList.remove("error");
                     emailError.style.display = "none";
                 }
     
                 // Role Selection Validation
                 if (role.value === "") {
-                    role.classList.add("error");
                     roleError.style.display = "block";
                     isValid = false;
-                } else {
-                    role.classList.remove("error");
+                } else {                    
                     roleError.style.display = "none";
                 }
     
